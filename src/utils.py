@@ -81,6 +81,11 @@ def get_all_election_data() -> None:
 
     all_data: ElectionData = combine_json_data(data_to_combine=[general_data, soc_data])
 
+    # Check if we actually have votes yet, if not do not save
+    if all_data["Groups"][0]["Items"][0]["Voters"] == 0:
+        print("[ERROR] No votes found in the data. Aborting...")
+        return
+
     date_generated: datetime = convert_generated_dt_to_object(
         generated_dt=get_generated_date(data=all_data)
     )
