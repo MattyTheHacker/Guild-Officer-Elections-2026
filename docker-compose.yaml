@@ -1,10 +1,10 @@
 services:
   datasette:
-    image: datasetteproject/datasette
+    build: .
     container_name: datasette
     restart: always
     volumes:
       - ./data/db/all_data.db:/data/all_data.db
     command: bash -c "datasette install datasette-plot && datasette -h 0.0.0.0 -p 8001 /data/all_data.db --setting max_returned_rows 7000"
-    expose:
-      - "8001"
+    ports:
+      - "127.0.0.1:8001:8001"
