@@ -6,12 +6,12 @@ import csv
 # pull the data from the db and do some stuff innit
 
 
-def get_db_data(table_name):
+def get_db_data(table_name: str):
     db_file_path = "../data/db/all_data.db"
     conn = sqlite3.connect(db_file_path)
     cur = conn.cursor()
 
-    command = "SELECT * FROM " + table_name
+    command: str = "SELECT * FROM " + table_name
 
     try:
         cur.execute(command)
@@ -33,7 +33,7 @@ def get_db_data(table_name):
     return data
 
 
-def save_final_count_as_csv(data, filename):
+def save_final_count_as_csv(data, filename: str):
     with open(filename, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Name", "Eligible", "Voters"])
@@ -41,7 +41,7 @@ def save_final_count_as_csv(data, filename):
             writer.writerow([item[1], item[2], item[-1]])
 
 
-def save_all_data_as_csv(data, filename):
+def save_all_data_as_csv(data, filename: str):
     with open(filename, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(data)

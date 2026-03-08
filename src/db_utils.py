@@ -80,6 +80,12 @@ def combine_student_group_data() -> None:
         "DROP TABLE IF EXISTS all_student_groups"
     )
 
+    # check if we actually have student group data, since again MSL is the worst piece of dog shit software any human could ever be tourmented by having to deal with
+    cur.execute("SELECT * FROM sqlite_master WHERE type='table' AND name IN ('associations', 'medsoc_societies_and_sports_clubs', 'societies', 'volunteering_groups')")
+    if not cur.fetchall():
+        print("[ERROR] No student group data found. Aborting...")
+        return
+
     # create new table first
     cur.execute(
         "CREATE TABLE all_student_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, eligible INTEGER, voters INTEGER, turnout REAL, timestamp TEXT)"

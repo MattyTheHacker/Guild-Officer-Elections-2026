@@ -70,10 +70,10 @@ def get_all_election_data() -> None:
     """
 
     GENERAL_DATA_URL: Final[str] = (
-        "https://www.guildofstudents.com/svc/voting/stats/election/paramstats/388?groupIds=1,6,7,8,9,10&sortBy=itemname&sortDirection=ascending"
+        "https://www.guildofstudents.com/svc/voting/stats/election/paramstats/609?groupIds=1,6,7,8,9,10&sortBy=itemname&sortDirection=ascending"
     )
     SOC_DATA_URL: Final[str] = (
-        "https://www.guildofstudents.com/svc/voting/stats/election/membershipstats/388?groupIds=1,2,3,4,5,6,7,8,9,10&sortBy=itemname&sortDirection=ascending"
+        "https://www.guildofstudents.com/svc/voting/stats/election/membershipstats/609?groupIds=1,2,3,4,5,6,7,8,9,10&sortBy=itemname&sortDirection=ascending"
     )
 
     general_data: ElectionData = get_data(url=GENERAL_DATA_URL)
@@ -85,7 +85,7 @@ def get_all_election_data() -> None:
         generated_dt=get_generated_date(data=all_data)
     )
 
-    save_json_data(data=all_data, filename=f"../data/json/raw/{date_generated}.json")
+    save_json_data(data=all_data, filename=f"../data/json/raw/{date_generated}.json".replace(":", ""))
 
     save_to_db(data=all_data, date_generated=date_generated)
 
