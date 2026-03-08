@@ -9,6 +9,10 @@ git fetch --all
 # Reset the local repository to match the remote repository
 git reset --hard origin/main
 
+# Create needed directories first
+mkdir -p ../data/db ../data/json/raw ../data/csv
+touch ../data/db/all_data.db
+
 # Run the application
 python3 main.py
 
