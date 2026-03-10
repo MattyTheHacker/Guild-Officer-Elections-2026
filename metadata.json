@@ -1,0 +1,22 @@
+{
+  "title": "Guild Officer Elections 2026 Live Tracker",
+  "description_html": "<h3>Welcome to the live election dashboard!</h3><p>Data is automatically updated every 15 minutes. Select a quick link below to view the live charts:</p><ul><li><a href='/all_data/total_votes_over_time#g.mark=line&g.x_column=timestamp&g.x_type=ordinal&g.y_column=vote_count&g.y_type=quantitative'>📈 Total Overall Votes Over Time</a></li><li><a href='/all_data/top_10_turnout#g.mark=line&g.x_column=timestamp&g.x_type=ordinal&g.y_column=turnout&g.y_type=quantitative&g.color_column=name'>🚀 Top 10 Societies by Turnout (Line Chart)</a></li><li><a href='/all_data/top_10_voters#g.mark=line&g.x_column=timestamp&g.x_type=ordinal&g.y_column=voters&g.y_type=quantitative&g.color_column=name'>👥 Top 10 Societies by Total Voters (Line Chart)</a></li></ul><br><p>Or, click on <strong>all_data</strong> below to explore the raw database.</p>",
+  "databases": {
+    "all_data": {
+      "queries": {
+        "total_votes_over_time": {
+          "title": "Total Votes Over Time",
+          "sql": "select timestamp, vote_count from total_vote_count order by timestamp asc"
+        },
+        "top_10_turnout": {
+          "title": "Top 10 Societies by Turnout",
+          "sql": "select timestamp, name, turnout from all_student_groups where name in (select name from all_student_groups where \"timestamp\" = (select max(\"timestamp\") from all_student_groups) order by turnout desc limit 10) order by timestamp asc"
+        },
+        "top_10_voters": {
+          "title": "Top 10 Societies by Total Voters",
+          "sql": "select timestamp, name, voters from all_student_groups where name in (select name from all_student_groups where \"timestamp\" = (select max(\"timestamp\") from all_student_groups) order by voters desc limit 10) order by timestamp asc"
+        }
+      }
+    }
+  }
+}
