@@ -80,7 +80,8 @@ def get_all_election_data() -> None:
     soc_data: ElectionData = get_data(url=SOC_DATA_URL)
 
     try:
-        general_data["Groups"]
+        print(general_data["DateGenerated"])
+        print(soc_data["DateGenerated"])
     except KeyError:
         print("Error fetching data from MSL API")
         return
