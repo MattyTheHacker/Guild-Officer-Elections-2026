@@ -79,6 +79,10 @@ def get_all_election_data() -> None:
     general_data: ElectionData = get_data(url=GENERAL_DATA_URL)
     soc_data: ElectionData = get_data(url=SOC_DATA_URL)
 
+    if "An error has occurred" in general_data or "An error has occurred" in soc_data:
+        print("Error fetching data from MSL API")
+        return
+
     all_data: ElectionData = combine_json_data(data_to_combine=[general_data, soc_data])
 
     print(all_data)
