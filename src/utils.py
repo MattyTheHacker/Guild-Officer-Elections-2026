@@ -79,7 +79,7 @@ def get_all_election_data() -> None:
     general_data: ElectionData = get_data(url=GENERAL_DATA_URL)
     soc_data: ElectionData = get_data(url=SOC_DATA_URL)
 
-    if "An error has occurred" in general_data or "An error has occurred" in soc_data:
+    if "An error has occurred" in general_data.items() or "An error has occurred" in soc_data.items():
         print("Error fetching data from MSL API")
         return
 
